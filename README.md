@@ -15,7 +15,7 @@ A comprehensive, production-grade overhaul of local computing, storage, and netw
              │                         ▼                         │
              │           ┌───────────────────────────┐           │
              │           │  Pi-hole DNS Management   │           │
-             │           │  (Port 8888 / dnsmasq)    │           │
+             │           │  (DNS 53 / Admin 8888)    │           │
              │           └─────────────┬─────────────┘           │
              ▼                         │                         ▼
 ┌───────────────────────────┐          │          ┌───────────────────────────┐
@@ -52,7 +52,7 @@ A comprehensive, production-grade overhaul of local computing, storage, and netw
 ### 🌐 Network Infrastructure & Services
 *   **Base Networking:** Hardcoded static local IP mapping (`192.168.68.68/24`) tied natively to the onboard Intel Gigabit Ethernet hardware stack.
 *   **Domain Management:** Segmented local resolution landscape running under the private enterprise domain: `homelab.internal`.
-*   **DNS Tier:** Containerized Pi-hole implementation operating over customized ports (`8888`), utilizing advanced `dnsmasq` syntax configurations to natively handle upstream automated wildcard subdomains (`*.homelab.internal`).
+*   **DNS Tier:** Containerized Pi-hole serving DNS on port `53`, with its web admin on `8888`, using a `dnsmasq` wildcard for `*.homelab.internal`.
 *   **Layer 7 Traffic Delivery:** Nginx Proxy Manager (NPM) acting as a secure edge proxy mesh. Orchestrates programmatic traffic routing, unifies internal custom SSL certificate bindings, and explicitly handles persistent Layer 7 connection integrity via custom WebSocket upstream streaming blocks for virtual console access (`noVNC`).
 
 ---
