@@ -1,6 +1,6 @@
 # Homelab Expansion Project: Bare-Metal Hypervisor & Secure Local Infrastructure
 
-A comprehensive, production-grade overhaul of local computing, storage, and networking layers to establish a highly available, secure, and monitored Type-1 Hypervisor node. This project involved migrating standalone legacy workstations into a unified, enterprise-grade bare-metal infrastructure deployment optimized for virtualized cluster scaling and containerized microservices.
+A comprehensive overhaul of local computing, storage, and networking layers to establish a secure, single-node Type-1 Hypervisor. This project involved migrating standalone legacy workstations into a unified bare-metal deployment built to host virtual machines and containerized services.
 
 ---
 ## Architecture Overview
@@ -51,7 +51,7 @@ A comprehensive, production-grade overhaul of local computing, storage, and netw
 
 ### 🌐 Network Infrastructure & Services
 *   **Base Networking:** Hardcoded static local IP mapping (`192.168.68.68/24`) tied natively to the onboard Intel Gigabit Ethernet hardware stack.
-*   **Domain Management:** Segmented local resolution landscape running under the private enterprise domain: `homelab.internal`.
+*   **Domain Management:** Segmented local resolution landscape running under the private domain: `homelab.internal`.
 *   **DNS Tier:** Containerized Pi-hole serving DNS on port `53`, with its web admin on `8888`, using a `dnsmasq` wildcard for `*.homelab.internal`.
 *   **Layer 7 Traffic Delivery:** Nginx Proxy Manager (NPM) acting as a secure edge proxy mesh. Orchestrates programmatic traffic routing, unifies internal custom SSL certificate bindings, and explicitly handles persistent Layer 7 connection integrity via custom WebSocket upstream streaming blocks for virtual console access (`noVNC`).
 
@@ -78,7 +78,7 @@ A comprehensive, production-grade overhaul of local computing, storage, and netw
 3.  **Boot Priority Lock:** Forced the system to boot explicitly in native UEFI mode, mapping the primary execution path directly onto the target Patriot Boot SSD volume.
 
 ### Phase 3: Operating System Deployment (Proxmox VE)
-1.  **Base System Flashing:** Deployed the latest enterprise Proxmox VE image utilizing a UEFI-partitioned Rufus layout on USB 3.0 interfaces.
+1.  **Base System Flashing:** Deployed the latest Proxmox VE image utilizing a UEFI-partitioned Rufus layout on USB 3.0 interfaces.
 2.  **Offline Static Configuration:** Pre-assigned and hardcoded all critical networking layers directly into the installer environment before physical network mapping:
     *   **FQDN:** `pve01.homelab.internal`
     *   **Management IP:** `192.168.68.68/24`
