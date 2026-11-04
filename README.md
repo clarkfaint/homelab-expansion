@@ -50,7 +50,7 @@ A comprehensive overhaul of local computing, storage, and networking layers to e
 *   **Storage Pool Architecture:** Software-Defined **ZFS File System (RAIDZ1 Configuration)** providing ~1.5 TB of storage capacity with dedicated single-disk parity fault tolerance and data self-healing metadata verification.
 
 ### 🌐 Network Infrastructure & Services
-*   **Base Networking:** Hardcoded static local IP mapping (`192.168.68.68/24`) tied natively to the onboard Intel Gigabit Ethernet hardware stack.
+*   **Base Networking:** Hardcoded static local IP mapping (`<host-IP>/24`) tied natively to the onboard Intel Gigabit Ethernet hardware stack.
 *   **Domain Management:** Segmented local resolution landscape running under the private domain: `homelab.internal`.
 *   **DNS Tier:** Containerized Pi-hole serving DNS on port `53`, with its web admin on `8888`, using a `dnsmasq` wildcard for `*.homelab.internal`.
 *   **Layer 7 Traffic Delivery:** Nginx Proxy Manager (NPM) acting as a secure edge proxy mesh. Orchestrates programmatic traffic routing, unifies internal custom SSL certificate bindings, and explicitly handles persistent Layer 7 connection integrity via custom WebSocket upstream streaming blocks for virtual console access (`noVNC`).
@@ -81,8 +81,8 @@ A comprehensive overhaul of local computing, storage, and networking layers to e
 1.  **Base System Flashing:** Deployed the latest Proxmox VE image utilizing a UEFI-partitioned Rufus layout on USB 3.0 interfaces.
 2.  **Offline Static Configuration:** Pre-assigned and hardcoded all critical networking layers directly into the installer environment before physical network mapping:
     *   **FQDN:** `pve01.homelab.internal`
-    *   **Management IP:** `192.168.68.68/24`
-    *   **Gateway:** `192.168.68.1`
+    *   **Management IP:** `<host-IP>/24`
+    *   **Gateway:** `<gateway-IP>`
     *   **DNS:** Primary home routing pathways (later transitioned downstream to Pi-hole loopsbacks).
 
 ### Phase 4: Software-Defined Storage Pool Creation
@@ -103,7 +103,7 @@ A comprehensive overhaul of local computing, storage, and networking layers to e
 ## Verification & Status
 
 *   **Compute Status:** 8 Logical threads fully online, idle temperatures maintaining standard limits under fresh thermal design integration.
-*   **Storage Health:** ZFS pool initialized cleanly. Continuous ZFS background scrubs active. Any single drive can fail completely without halting system data availability.
+*   **Storage Health:** ZFS pool initialized cleanly. Periodic ZFS scrubs check data integrity. Any single drive can fail completely without halting system data availability.
 *   **Networking Verification:** Accessing `https://homelab.internal` instantly handshakes with the NPM proxy layer, verifies local SSL certificate authority bindings, and routes traffic cleanly down to the hypervisor dashboard over a single secure port mapping.
 
 ---
